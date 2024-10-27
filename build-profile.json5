@@ -1,0 +1,49 @@
+{
+  "app": {
+    "signingConfigs": [
+      {
+        "name": "default",
+        "type": "HarmonyOS",
+        "material": {
+          "certpath": "C:\\Users\\Portable\\.ohos\\config\\default_fancy_todo_7jG6EiQ-Pgkz4gdd-9RDz39sa0VdGCgG9S7J-ie72HM=.cer",
+          "storePassword": "0000001BDCBC6B6F380E368D2281E466BCD303650C27F222B985800D1D2DC10299F28E3DA5F3D9E319B156",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001B0DBBE8D32B38B847DE41E79FAC62973234AF58491C750D1A67DD5BA083FEB4A9D4D782EDDCA804",
+          "profile": "C:\\Users\\Portable\\.ohos\\config\\default_fancy_todo_7jG6EiQ-Pgkz4gdd-9RDz39sa0VdGCgG9S7J-ie72HM=.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "C:\\Users\\Portable\\.ohos\\config\\default_fancy_todo_7jG6EiQ-Pgkz4gdd-9RDz39sa0VdGCgG9S7J-ie72HM=.p12"
+        }
+      }
+    ],
+    "compileSdkVersion": 9,
+    "compatibleSdkVersion": 9,
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+      }
+    ],
+    "buildModeSet": [
+      {
+        "name": "debug",
+      },
+      {
+        "name": "release"
+      }
+    ]
+  },
+  "modules": [
+    {
+      "name": "entry",
+      "srcPath": "./entry",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    }
+  ]
+}
