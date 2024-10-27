@@ -74,17 +74,14 @@ Button('随机选择', { type: ButtonType.Normal })
 
 ### 主界面
 
-如图为主界面(用户可以通过“任务配置”按钮进入任务配置界面)
-
-<img src="file:///C:/Users/Portable/AppData/Roaming/marktext/images/2024-10-27-17-52-03-image.png" title="" alt="" data-align="center">
+主界面(用户可以通过“任务配置”按钮进入任务配置界面)
 
 
 
 ### 任务配界面
 
-如图为任务配置界面(局部)(做完修改后用户仍需在主界面点击“刷新列表”按钮😢)
+任务配置界面(局部)(做完修改后用户仍需在主界面点击“刷新列表”按钮😢)
 
-![Screenshot_20241027_170250_com.example.fancy_todo.jpg](C:\Users\Portable\Desktop\Screenshot_20241027_170250_com.example.fancy_todo.jpg)
 
 
 
