@@ -5,6 +5,7 @@ import promptAction from '@ohos.promptAction';
 
 @CustomDialog
 struct CustomDialogAoE {
+  @State Title: string = 'Create new task';
   @State TaskList: TaskType[] = [];
   @State alert: string = '';
   @State orgInput: string = "New Task"
@@ -27,19 +28,21 @@ struct CustomDialogAoE {
       .onClick(() => {
         animateTo({duration: 300, curve: Curve.EaseInOut},() => {
           this.deepEdit = !this.deepEdit
+          if (!this.canAdd) return
           if (this.deepEdit) this.alert = '请完善任务细节'
           else this.alert = '请输入任务名称'
         })
       })
-  }
-  private Mode?: string
-  private Index?: number
+  };
+  private Mode?: string;
+  private Index?: number;
   startDate: Date = new Date(2024, 6, 1);
   controller: CustomDialogController;
   cancel: () => void;
   confirm: () => void;
   aboutToAppear(): void {
     if (this.Mode === 'edit') {
+      this.Title = 'Edit Task'
       let tmp: TaskType = this.TaskList[this.Index]
       this.orgInput = this.userInput = tmp.name
       this.orgInputContain = this.userInputContain = tmp.contain
@@ -51,7 +54,7 @@ struct CustomDialogAoE {
   build() {
     Scroll() {
       Column() {
-        Text('Create new task').fontSize(20).margin({ top: 10, bottom: 10 }).fontColor('#ffffffff').height(30)
+        Text(this.Title).fontSize(20).margin({ top: 10, bottom: 10 }).fontColor('#ffffffff').height(30)
         Row({ space: '5vp' }) {
           TextInput({ text: this.orgInput, placeholder: 'New Task' })
             .width('80%')
