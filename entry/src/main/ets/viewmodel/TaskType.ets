@@ -5,7 +5,8 @@ interface TaskType {
   contain: string, // 具体内容
   isSelect: boolean, // 是否被选择，便于删除
   priorityLevel: number, // 越大越靠前，默认为1
-  deadLine?: string // 截止日期(可选)
+  enDeadline: boolean, // 激活日期(可选)
+  deadLine: string // 截止日期同上一项
 }
 
 class ClsToDoDetail{
@@ -15,7 +16,8 @@ class ClsToDoDetail{
     contain: 'Jest a Test!',
     isSelect: false,
     priorityLevel: 1,
-    deadLine: '01/01/2040'
+    enDeadline: true,
+    deadLine: '01/01/2040',
   }]
 
   initData() {
@@ -24,7 +26,9 @@ class ClsToDoDetail{
         name: this.Data[i],
         contain: 'undefined',
         isSelect: false,
-        priorityLevel: 1
+        priorityLevel: 1,
+        enDeadline: false,
+        deadLine: 'None'
       })
     }
   }
