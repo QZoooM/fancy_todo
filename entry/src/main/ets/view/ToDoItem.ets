@@ -84,14 +84,13 @@ export default struct ToDoItem {
                 Text(this.Task.contain)
                   .fontColor(CommonConstants.FONT_DEFAULT_COLOR)
                   .width('80%')
-                Row().height('10vp')
               }
               .align(Alignment.TopStart)
             }
             .backgroundColor('#ff222222')
             .borderRadius('8vp')
             .shadow(CommonConstants.SHADOW_DEFAULT_CONFIG)
-            .margin($r('app.float.checkbox_margin'))
+            .margin('5vp')
             .height('50%')
             Column() {
               Image($r('app.media.edit'))
@@ -102,6 +101,14 @@ export default struct ToDoItem {
                   this.dialogEdit.open()
                 })
             }
+          }
+          Row() {
+            Text(`任务优先参数：${this.Task.priorityLevel}；`)
+              .fontColor(CommonConstants.FONT_LIST_COLOR)
+              .margin('5vp')
+            Text(`截止日期：${this.Task.deadLine}`)
+              .fontColor(CommonConstants.FONT_LIST_COLOR)
+              .margin('5vp')
           }
         }
       }
