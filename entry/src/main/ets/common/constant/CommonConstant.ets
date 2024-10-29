@@ -1,6 +1,6 @@
 export default class CommonConstants {
   static readonly DIALOG_DEFAULT_HEIGHT: string = '210vp';
-  static readonly DIALOG_EDIT_HEIGHT: string = '400vp';
+  static readonly DIALOG_EDIT_HEIGHT: string = '520vp';
   static readonly TINY_SIZE_IMAGE = {width: '28vp', height: '28vp'};
   static readonly MID_SIZE_IMAGE = {width: '36vp', height: '36vp'};
   static readonly FULL_LENGTH: string = '100%';
