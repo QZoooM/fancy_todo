@@ -20,13 +20,9 @@ export default class CommonConstants {
   static readonly TODO_DATA: Array<string> = [
     "梳理",
     "上学",
-    '打？？球',
     '运动',
-    'MakeMusics',
-    '遛狗',
+    '编曲',
     '学高数',
-    '打电动',
-    '再睡5分钟',
     '社交',
   ];
 }
