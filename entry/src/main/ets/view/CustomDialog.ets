@@ -1,3 +1,7 @@
+// CustomDialog.ets
+// Which stores Dialogs
+// Includes AddTask, EditTask, DeleteTask
+
 import CommonConstants from '../common/constant/CommonConstant';
 import { createFile } from '../utils/FilesOperation'
 import {TaskType} from '../viewmodel/TaskType'
@@ -85,7 +89,7 @@ struct CustomDialogAoE {
         }.align(Alignment.Start)
 
         Text(this.alert)
-          .fontColor(this.canAdd ? '#ffffffff' : '#ffff0000')
+          .fontColor(this.canAdd ? CommonConstants.FONT_DEFAULT_COLOR : '#ffff0000')
           .margin({ bottom: 10 })
         if (this.deepEdit) {
           TextArea({ text: this.orgInputContain, placeholder: 'Task Detail' })
@@ -222,9 +226,19 @@ struct CustomDialogDel {
   controller: CustomDialogController
   cancel: () => void
   confirm: () => void
+  @Builder labelIcon(icon: Resource) {
+    Image(icon)
+      .objectFit(ImageFit.Contain)
+      .size(CommonConstants.TINY_SIZE_IMAGE)
+      .margin($r('app.float.checkbox_margin'))
+  }
   build() {
     Column() {
-      Text('Delete Selected Tasks?').fontSize(20).margin({ top: 10, bottom: 10 }).fontColor('#ffff0000').height(30)
+      Row() {
+        this.labelIcon($r('app.media.dustbin_open'))
+        Text('Delete Selected Tasks?').fontSize(20).margin({ top: 10, bottom: 10 }).fontColor('#ffff0000').height(30)
+        this.labelIcon($r('app.media.dustbin_open'))
+      }
       Flex({ justifyContent: FlexAlign.SpaceAround }) {
         Button('cancel',{type:ButtonType.Normal}).width('50%').height('100%')
           .onClick(() => {
@@ -259,10 +273,57 @@ struct CustomDialogDel {
           .fontColor(CommonConstants.FONT_DEFAULT_COLOR)
           .fontSize(30)
       }.height(160).align(Alignment.Bottom)
-    }.backgroundColor('#e9000000').height('200')
+    }.backgroundColor('#e9000000').height('200vp')
+  }
+}
+@CustomDialog
+struct CustomDialogSingleDel {
+  @State TaskList: TaskType[] = [];
+  @State Index: number = -1;
+  controller: CustomDialogController;
+  @Builder labelIcon(icon: Resource) {
+    Image(icon)
+      .objectFit(ImageFit.Contain)
+      .size(CommonConstants.TINY_SIZE_IMAGE)
+      .margin($r('app.float.checkbox_margin'))
+  }
+  build() {
+    Column() {
+      Row() {
+        this.labelIcon($r('app.media.dustbin_open'))
+        Text('Delete this Task?').fontSize(20).margin({ top: 10, bottom: 10 }).fontColor('#ffff0000').height(30)
+        this.labelIcon($r('app.media.dustbin_open'))
+      }
+      Flex({ justifyContent: FlexAlign.SpaceAround }) {
+        Button('cancel',{type:ButtonType.Normal}).width('50%').height('100%')
+          .onClick(() => {
+            this.controller.close()
+          }).backgroundColor('#ff2b2b2b')
+          .fontColor(CommonConstants.FONT_DEFAULT_COLOR)
+          .margin({right: '1vp'})
+          .fontSize(30)
+        Button('Delete',{type:ButtonType.Normal}).width('50%').height('100%')
+          .onClick(() => {
+            this.TaskList.splice(this.Index,1)
+            this.controller.close()
+            // 这里放置创建文件的方法
+            let str: string = JSON.stringify(this.TaskList)
+            let space: string = ' '
+            for(var i = 0; i < 16; i++){
+              space += space
+              if ((str + space).length >= 65536) {
+                break
+              }
+            }
+            createFile('list', str + space)
+          }).backgroundColor('#ffbc0000')
+          .fontColor(CommonConstants.FONT_DEFAULT_COLOR)
+          .fontSize(30)
+      }.height(140).align(Alignment.Bottom)
+    }.backgroundColor('#e9000000').height('200vp')
   }
 }
 
 export {
-  CustomDialogAoE, CustomDialogDel
+  CustomDialogAoE, CustomDialogDel, CustomDialogSingleDel
 }

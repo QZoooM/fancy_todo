@@ -1,3 +1,6 @@
+// Index.ets
+// Which is a page to show the special function
+
 import { createFile, simpleReadFile } from '../utils/FilesOperation'
 import { TaskType, ToDoDetail } from '../viewmodel/TaskType'
 import router from '@ohos.router';
@@ -7,9 +10,10 @@ ToDoDetail.initData()
 @Entry
 @Component
 struct Index {
-  @State message: string = '今天要做什么';
+  @State message: string = '今天要做什么\n如果毫无头绪\n不妨按下“随机选择”';
   @State TaskList: TaskType[] = null!; // 预存列表变量
-
+  // @State HeadArea: Area = null!;
+  // 初始化原始数据，存储在list.txt中
   aboutToAppear(): void {
     try {
       let arr = simpleReadFile('list');
@@ -32,12 +36,12 @@ struct Index {
     Row() {
       Column({space: '10vp'}) {
         Column() {
-          Text(this.message)
-            .fontSize(80)
+          TextArea({text: this.message})
+            .fontSize(60)
             .fontColor(CommonConstants.FONT_RANDOM_COLOR)
             .fontWeight(CommonConstants.FONT_WEIGHT)
         }
-        .size({width: '90%', height: '50%'})
+        .size({width: '90%', height: '40%'})
         .borderRadius('8vp')
         .backgroundColor('#ff222222')
         .shadow({ color: '#c6ffffff', radius: 8, offsetY: 2 })
@@ -47,7 +51,7 @@ struct Index {
             .borderRadius(CommonConstants.BORDER_RADIUS)
             .fontSize('30vp')
             .width('40%')
-            .onClick(() => {
+            .onClick(() => { // 主要随机功能放置处
               let totalWeight: number = 0;
               let rangeWeight: number[][] = [];
               let left: number = 0;
@@ -73,7 +77,7 @@ struct Index {
             .fontSize('30vp')
             .width('40%')
             .onClick(() => {
-              this.message = '今天要做什么'
+              this.message = '今天要做什么\n如果毫无头绪\n不妨按下“随机选择”'
             })
         }
         .justifyContent(FlexAlign.Center)
@@ -86,19 +90,28 @@ struct Index {
             let arr = simpleReadFile('list');
             this.TaskList = JSON.parse(arr[1]);
           })
-        Button('任务配置', { type: ButtonType.Normal })
-          .borderRadius(CommonConstants.BORDER_RADIUS)
-          .fontColor(CommonConstants.FONT_LIST_COLOR)
-          .fontSize('60vp')
-          .onClick(() => {
-            router.pushUrl({
-              url: 'pages/TaskSetup'
+        Row() {
+          Button('任务配置', { type: ButtonType.Normal })
+            .borderRadius(CommonConstants.BORDER_RADIUS)
+            .fontColor(CommonConstants.FONT_LIST_COLOR)
+            .fontSize('60vp')
+            .onClick(() => {
+              router.pushUrl({
+                url: 'pages/TaskSetup'
+              })
             })
-          })
+          // Text(JSON.stringify(this.HeadArea))
+          //   .fontColor(CommonConstants.FONT_DEFAULT_COLOR)
+        }
       }
       .justifyContent(FlexAlign.Center)
+      .height(CommonConstants.FULL_LENGTH)
       .width(CommonConstants.FULL_LENGTH)
     }
+    // .onAreaChange((oldArea,newArea) => {
+    //   this.HeadArea = newArea
+    // })
+    .width(CommonConstants.FULL_LENGTH)
     .height(CommonConstants.FULL_LENGTH)
     .backgroundColor(CommonConstants.BACKGROUND_DEFAULT_COLOR)
   }

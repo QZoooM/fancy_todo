@@ -17,6 +17,7 @@ export default class CommonConstants {
   static readonly FONT_WEIGHT: number = 500;
   static readonly COLUMN_SPACE: number = 8;
   static readonly SHADOW_DEFAULT_CONFIG = { color: '#c6ffffff', radius: 8, offsetY: 2 };
+  static readonly BUTTON_BUTTON_SIZE = {width: '45%', height: '100%'};
   static readonly TODO_DATA: Array<string> = [
     "梳理",
     "上学",

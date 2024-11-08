@@ -1,10 +1,12 @@
+// TaskSetup.ets
+// Which is a page to display the tasks details
+
 import CommonConstants from '../common/constant/CommonConstant';
 import { simpleReadFile } from '../utils/FilesOperation'
 import ToDoItem from '../view/ToDoItem';
 import router from '@ohos.router';
 import {TaskType} from '../viewmodel/TaskType'
 import { CustomDialogAoE, CustomDialogDel} from '../view/CustomDialog'
-
 
 @Entry
 @Component
@@ -17,7 +19,6 @@ struct TaskSetup {
   }
   dialogAdd: CustomDialogController = new CustomDialogController({
     builder: CustomDialogAoE({
-      // 总之必须有一个量与外部的一个量进行绑定！方法如下：
       TaskList: this.TaskList, // 这里，是把对话弹窗的ToDoList与this.totalTasks绑定，同步内容修改！
       Mode: 'add', // 添加模式
       cancel: this.AddCancel, // 与组件里的cancel行为绑定
@@ -44,9 +45,7 @@ struct TaskSetup {
   DelCancel() {
     console.info('Callback when the first button is clicked')
   }
-  DelAccept() {
-
-  }
+  DelAccept() {}
 
   build() {
     Column() {
@@ -66,12 +65,10 @@ struct TaskSetup {
           .minFontSize('10vp')
           .maxFontSize('30vp')
           .fontWeight(FontWeight.Bold)
-          .width(CommonConstants.TITLE_WIDTH)
-          .height(CommonConstants.TITLE_HEIGHT)
-          .textAlign(TextAlign.Center)
       }
       .backgroundColor("#ff515355")
       .width('100%')
+      .height('10%')
 
       Column() {
         Scroll() {
@@ -100,8 +97,7 @@ struct TaskSetup {
             .maxFontSize('30vp')
             .fontColor(CommonConstants.FONT_DEFAULT_COLOR)
         }
-        .width('45%')
-        .height('100%')
+        .size(CommonConstants.BUTTON_BUTTON_SIZE)
         .onClick(() => {
           this.dialogAdd.open();
         })
@@ -112,8 +108,7 @@ struct TaskSetup {
             .maxFontSize('30vp')
             .fontColor(CommonConstants.FONT_DEFAULT_COLOR)
         }
-        .width('45%')
-        .height('100%')
+        .size(CommonConstants.BUTTON_BUTTON_SIZE)
         .backgroundColor('#ffff1111')
         .onClick(() => {
           this.dialogDel.open()
@@ -125,5 +120,6 @@ struct TaskSetup {
     }
     .backgroundColor(CommonConstants.BACKGROUND_DEFAULT_COLOR)
     .width(CommonConstants.FULL_LENGTH)
+    .height(CommonConstants.FULL_LENGTH)
   }
 }

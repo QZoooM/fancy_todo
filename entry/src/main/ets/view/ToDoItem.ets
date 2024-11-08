@@ -1,6 +1,6 @@
 import CommonConstants from '../common/constant/CommonConstant';
 import { TaskType } from '../viewmodel/TaskType'
-import { CustomDialogAoE } from '../view/CustomDialog'
+import { CustomDialogAoE, CustomDialogSingleDel } from '../view/CustomDialog'
 
 @Component
 export default struct ToDoItem {
@@ -9,7 +9,12 @@ export default struct ToDoItem {
   @State index: number = -1;
   @State isComplete: boolean = false;
   @State isRelax: boolean = false;
-
+  dialogSingleDel: CustomDialogController = new CustomDialogController({
+    builder: CustomDialogSingleDel({
+      TaskList: this.TaskList,
+      Index: this.index,
+    })
+  })
   dialogEdit: CustomDialogController = new CustomDialogController({
     builder: CustomDialogAoE({
       TaskList: this.TaskList,
@@ -99,6 +104,13 @@ export default struct ToDoItem {
                 .margin($r('app.float.checkbox_margin'))
                 .onClick(() => {
                   this.dialogEdit.open()
+                })
+              Image($r('app.media.dustbin'))
+                .objectFit(ImageFit.Contain)
+                .size(CommonConstants.MID_SIZE_IMAGE)
+                .margin($r('app.float.checkbox_margin'))
+                .onClick(() => {
+                  this.dialogSingleDel.open()
                 })
             }
           }
